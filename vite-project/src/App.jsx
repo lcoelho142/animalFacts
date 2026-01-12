@@ -44,14 +44,14 @@ const showBackground = true;
 
 
 const animalFacts = (
-  <div>
-    <h1>
-      { title === '' ? `Click an animal for a fun fact` : title }
-    </h1>
-    { showBackground ? background : null }
-    <p id='fact'></p>
-    <div className='animals'>{images}</div>
-  </div>
+  <>
+      <h1>
+        { title === '' ? `Click an animal for a fun fact` : title }
+      </h1>
+      { showBackground ? background : null }
+      <p id='fact'></p>
+      <div className='animals'>{images}</div>
+  </>
 )
 
 root.render(animalFacts);
