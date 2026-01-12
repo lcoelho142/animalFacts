@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { animals } from './animals';
 import './App.css'
+import { createRoot } from 'react-dom/client';
 
-function App() {
-  const [count, setCount] = useState(0)
+const container = document.getElementById('app');
+const root = createRoot(container);
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+const title = '';
+const background = (
+  <img 
+    className='background'
+    alt='ocean'
+    src='/images/ocean-background.svg'
+  />
+);
+
+const images = [];
+for (const animal in animals) {
+  const image = (
+    <img
+    onClick={displayFact} 
+    key={animal}
+    className='animal'
+    alt={animal}
+    src={animals[animal].image}
+    aria-label={animal}
+    role='button'
+    />
+  );
+  images.push(image)
 }
 
-export default App
+
+function displayFact(e) {
+  const name = e.target.alt;
+  const facts = animals[name].facts;
+  const index = Math.floor(Math.random() * facts.length);
+  const fact = facts[index];
+  const factEl = document.getElementById('fact');
+  if (factEl) factEl.innerHTML = fact;
+}
+
+const showBackground = true;
+
+
+const animalFacts = (
+  <div>
+    <h1>
+      { title === '' ? `Click an animal for a fun fact` : title }
+    </h1>
+    { showBackground ? background : null }
+    <p id='fact'></p>
+    <div className='animals'>{images}</div>
+  </div>
+)
+
+root.render(animalFacts);
+
