@@ -10,7 +10,7 @@ const background = (
   <img 
     className='background'
     alt='ocean'
-    src='/images/ocean-background.svg'
+    src='images/ocean-background.svg'
   />
 );
 
